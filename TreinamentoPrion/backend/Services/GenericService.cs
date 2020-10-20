@@ -17,14 +17,29 @@ namespace Backend.Services
             repository = new GenericRepository();
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             repository.Add(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             repository.Entry(entity);
+        }
+
+        public virtual void Delete(T entity)
+        {
+            repository.Delete(entity);
+        }
+
+        public virtual T FindById(int id)
+        {
+            return repository.FindById();
+        }
+
+        public virtual List<T> FindAll()
+        {
+            return repository.FindAll();
         }
 
         public void Dispose()
