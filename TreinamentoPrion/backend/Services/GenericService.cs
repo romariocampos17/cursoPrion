@@ -1,3 +1,4 @@
+using backend.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace Backend.Services
     {
         
 
-        private GenericRepository<T> Repository;
+        private GenericRepository<T> repository;
 
         public GenericService()
         {
-            repository = new GenericRepository();
+            repository = new GenericRepository<T>();
         }
 
         public virtual void Add(T entity)
@@ -24,7 +25,7 @@ namespace Backend.Services
 
         public virtual void Update(T entity)
         {
-            repository.Entry(entity);
+            repository.Update(entity);
         }
 
         public virtual void Delete(T entity)
@@ -34,7 +35,7 @@ namespace Backend.Services
 
         public virtual T FindById(int id)
         {
-            return repository.FindById();
+            return repository.FindById(id);
         }
 
         public virtual List<T> FindAll()

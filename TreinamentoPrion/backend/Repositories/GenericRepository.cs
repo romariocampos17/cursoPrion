@@ -37,7 +37,7 @@ namespace backend.Repositories
 
         public virtual T FindById(int id)
         {
-            return context.Set<T>().find(id);
+            return context.Set<T>().Find(id);
         }
 
         public virtual List<T> FindAll()
