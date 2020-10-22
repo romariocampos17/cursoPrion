@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace backend.Services
 {
-    class PessoaService : GenericService<Pessoa>
+    public class PessoaService : GenericService<Pessoa>
     {
         public override List<Pessoa> FindAll()
         {
             List<Pessoa> pessoas = new List<Pessoa>();
             pessoas.Add( new Pessoa {
+            PessoaId = 1,
+            Nome = "Romário",
             Email = "romariocampos@gmail.com"
             });
             return pessoas;
