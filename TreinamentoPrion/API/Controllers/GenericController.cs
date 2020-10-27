@@ -3,13 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
-using static System.Net.WebRequestMethods;
+using System.Web.Http;
 
 namespace API.Controllers
 {
-    [Http.RoutePrefix("api")]
-    public class GenericController<T> : Controller  where T : class
+    public class GenericController<T> : ApiController  where T : class
     {
         protected GenericService<T> services;
 
@@ -23,8 +21,7 @@ namespace API.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [Http.Route("Add")]
-        [Http.HttpPost]
+        [HttpPost]
         public virtual void Add(T entity)
         {
             services.Add(entity);
@@ -35,8 +32,7 @@ namespace API.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [Http.Route("Update")]
-        [Http.HttpPost]
+        [HttpPost]
         public virtual void Update(T entity)
         {
             services.Update(entity);
@@ -47,8 +43,7 @@ namespace API.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [Http.Route("Delete")]
-        [Http.HttpPost]
+        [HttpPost]
         public virtual void Delete(T entity)
         {
             services.Delete(entity);
@@ -58,8 +53,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Http.Route("{id:int}/FindById")]
-        [Http.HttpGet]
+        [HttpGet]
         public virtual T FindById(int id)
         {
             return services.FindById(id);
@@ -69,8 +63,7 @@ namespace API.Controllers
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [Http.Route("FindAll")]
-        [Http.HttpGet]
+        [HttpGet]
         public virtual List<T> FindAll()
         {
             return services.FindAll();

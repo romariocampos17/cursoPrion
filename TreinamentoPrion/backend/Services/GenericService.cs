@@ -45,7 +45,7 @@ namespace Backend.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            repository.Dispose();
         }
 
     }
