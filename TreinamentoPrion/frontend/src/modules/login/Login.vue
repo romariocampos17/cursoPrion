@@ -1,25 +1,25 @@
 <template>
   <v-container id="login" >
     <v-form @submit="login">
+      <v-row >
+        <v-col md="4" offset-md="4">
+          <v-text-field v-model="payload.login"  label="Login">
+          </v-text-field>
+        </v-col>
+      </v-row>
+
+      <v-row >
+        <v-col md="4" offset-md="4">
+          <v-text-field v-model="payload.password" label="Password">
+          </v-text-field>
+        </v-col>
+      </v-row>
+
       <v-row>
-      <v-col >
-        <v-text-field v-model="payload.login"  label="Login">
-        </v-text-field>
-      </v-col>
-    </v-row>
-
-    <v-row >
-      <v-col >
-        <v-text-field v-model="payload.password" label="Password">
-        </v-text-field>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col>
-        <v-btn type="submit">Login</v-btn>
-      </v-col>
-    </v-row>
+        <v-col>
+          <v-btn type="submit">Login</v-btn>
+        </v-col>
+      </v-row>
     </v-form>
   </v-container>
 </template>
@@ -53,8 +53,6 @@ export default {
 <style scoped>
 #login {
   background-color: #42b983;
-  width: 30%;
-  border-radius: 20px;
 }
 
 </style>
