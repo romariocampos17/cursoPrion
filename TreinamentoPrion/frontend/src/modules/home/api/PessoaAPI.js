@@ -1,11 +1,11 @@
-import baseAPI from '@/http'
+import baseAPI from '@/http';
 
-const router = 'api/Pessoa'
+const router = 'api/Pessoa';
 
 export const pessoaAPI = {
   get: (id) => baseAPI.get(`${router}/${id}`),
-  list: (id) => baseAPI.get(router),
+  list: () => baseAPI.get(router),
   create: (pessoa) => baseAPI.post(router, pessoa),
   update: (pessoa) => baseAPI.put(router, pessoa),
   delete: (id) => baseAPI.delete(`${router}/${id}`),
-}
+};
