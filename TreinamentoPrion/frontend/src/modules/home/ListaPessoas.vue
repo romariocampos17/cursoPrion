@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <v-data-tabel
+    <v-data-table
       :headers="headers"
       :items="pessoas"
     >
       <template slot="no-data">
         <span>Nenhuma Pessoa Retornada</span>
       </template>
-    </v-data-tabel>
+    </v-data-table>
   </v-container>
 </template>
 
@@ -20,11 +20,11 @@ export default {
       headers: [
         {
           text: 'Nome',
-          value: 'nome',
+          value: 'Nome',
         },
         {
           text: 'Email',
-          value: 'email',
+          value: 'Email',
         },
       ],
       pessoas: [],
