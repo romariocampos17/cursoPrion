@@ -7,8 +7,12 @@ export default new Vuex.Store({
   state: {
     isLogged: false,
     user: {},
+    load: false,
   },
   mutations: {
+    SET_LOAD(state, payload) {
+      state.load = payload;
+    },
     SET_USER(state, payload) {
       state.user = payload;
       state.isLogged = true;
@@ -18,6 +22,9 @@ export default new Vuex.Store({
   actions: {
     setUser({ commit }, payload) {
       commit('SET_USER', payload);
+    },
+    setLoad({ commit }, payload) {
+      commit('SET_LOAD', payload);
     },
   },
   modules: {

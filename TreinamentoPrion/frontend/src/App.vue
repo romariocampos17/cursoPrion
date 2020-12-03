@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Loader :is-visible="load"></Loader>
     <div id="nav">
       <router-link to="/home">Home</router-link> |
       <router-link to="/about">About</router-link> |
@@ -11,7 +12,25 @@
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import Loader from '@/components/Loader.vue';
+import { mapActions, mapGetters } from 'vuex';
+
+export default {
+  components: { Loader },
+  computed: { ...mapGetters(['load']) },
+  data() {
+    return {
+    };
+  },
+  methods: {
+    computed: { ...mapActions(['setLoad']) },
+  },
+};
+</script>
+
+<style
+    Loaderlang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -15,22 +15,22 @@ export default {
   components: {
     HelloWorld,
   },
-  data () {
+  data() {
     return {
-      pessoas: []
-    }
+      pessoas: [],
+    };
   },
   methods: {
-    listarPessoas () {
+    listarPessoas() {
       pessoaAPI.list()
-        .then(resp => {
-          this.pessoas = resp.data
+        .then((resp) => {
+          this.pessoas = resp.data;
         })
-        .catch()
-    }
+        .catch();
+    },
   },
   mounted() {
-    this.listarPessoas()
-  }
+    this.listarPessoas();
+  },
 };
 </script>
