@@ -35,18 +35,28 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { pessoaAPI } from './API/PessoaAPI';
 
 export default {
   data() {
     return {
       pessoas: {},
+      nameRules: [
+        (v) => !!v || 'Nome Obrigatório',
+      ],
+      emailRules: [
+        (v) => !!v || 'Email Obrigatório',
+      ],
     };
   },
   methods: {
+    ...mapActions(['setLoad']),
     addPessoas() {
+      this.setLoad(true);
       pessoaAPI.create(this.pessoas)
         .then(() => {
+          this.setLoad(false);
           console.log('Cadastrado Com Sucesso');
         })
         .catch((error) => (console.log(error)));

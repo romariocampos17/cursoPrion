@@ -29,4 +29,9 @@ export default new Vuex.Store({
   },
   modules: {
   },
+  getters: {
+    isLogged: (state) => state.load,
+    user: (state) => state.user,
+    load: (state) => state.load,
+  },
 });

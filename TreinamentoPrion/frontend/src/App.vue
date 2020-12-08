@@ -14,7 +14,7 @@
 
 <script>
 import Loader from '@/components/Loader.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { Loader },
@@ -22,9 +22,6 @@ export default {
   data() {
     return {
     };
-  },
-  methods: {
-    computed: { ...mapActions(['setLoad']) },
   },
 };
 </script>

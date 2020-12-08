@@ -1,5 +1,6 @@
 <template>
   <v-container id="login" >
+    <Loader :is-visible="load"></Loader>
     <v-form @submit="login">
       <v-row >
         <v-col md="4" offset-md="4">
@@ -20,17 +21,27 @@
           <v-btn type="submit">Login</v-btn>
         </v-col>
       </v-row>
+
+      <v-row>
+        <v-col>
+          <v-btn @Click="carregaLoader()">VueLoader</v-btn>
+        </v-col>
+      </v-row>
     </v-form>
   </v-container>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import Loader from '@/components/Loader.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  components: { Loader },
+  computed: { ...mapGetters(['load']) },
   data() {
     return {
       payload: {},
+      load: false,
     };
   },
   methods: {
@@ -46,6 +57,10 @@ export default {
       //   }
       }
     },
+    carregaLoader() {
+      this.load = false;
+    },
+    computed: { ...mapActions(['setLoad']) },
   },
 };
 </script>
