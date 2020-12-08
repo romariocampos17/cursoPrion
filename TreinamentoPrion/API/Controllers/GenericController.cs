@@ -26,7 +26,7 @@ namespace API.Controllers
         /// <param></param>
         /// <returns></returns>
         [HttpPost]
-        public virtual void Add(T entity)
+        public virtual void Add([FromForm] T entity)
         {
             services.Add(entity);
         }

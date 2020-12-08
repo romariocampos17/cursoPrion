@@ -197,6 +197,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CustomAuthorizeAttribute.cs" />
     <Compile Include="Controllers\CustomExceptionFilterAttribute.cs" />
+    <Compile Include="Controllers\FromFormAttribute.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PessoaController.cs" />

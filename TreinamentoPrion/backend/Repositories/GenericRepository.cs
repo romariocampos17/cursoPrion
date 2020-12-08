@@ -12,7 +12,7 @@ namespace backend.Repositories
         public GenericContext context;
 
         public GenericRepository()
-        {
+        {  
             context = new GenericContext();
         }
 
