@@ -11,7 +11,7 @@ namespace Backend.Services
     {
         
 
-        private GenericRepository<T> repository;
+        public GenericRepository<T> repository;
 
         public GenericService()
         {
