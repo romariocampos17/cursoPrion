@@ -1,7 +1,10 @@
-﻿using Backend.Services;
+﻿using backend.Entities;
+using Backend.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -10,6 +13,7 @@ namespace API.Controllers
 {
     [CustomAuthorize]
     [EnableCors(origins: "*", headers:"*", methods: "*")]
+    [Authorize()]
     [CustomExceptionFilter]
     public class GenericController<T> : ApiController  where T : class
     {
@@ -72,5 +76,15 @@ namespace API.Controllers
         {
             return services.FindAll();
         }
-    }
+
+        public Usuarios UsuarioLogado {
+            get {var principal = (RequestContext.Principal as ClaimsPrincipal);
+                var json = principal.Claims.Where(x => x.Type == "User").FirstOrDefault().Value;
+
+                Usuarios logged = JsonConvert.DeserializeObject<Usuarios>(json);
+
+                return logged;
+                }
+            set { UsuarioLogado = value; }
+        }
 }
