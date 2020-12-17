@@ -1,4 +1,5 @@
 ﻿using backend.Entities;
+using backend.Repositories;
 using backend.Services;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -6,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Web;
@@ -13,51 +16,23 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    [RoutePrefix("api/usuario")]
     public class UsuarioController : GenericController<Usuarios>
     {
         [AllowAnonymous]
         [HttpPost]
-        public Object GetUsuarioPorEmail([FromBody] Usuarios user)
+        [Route("login")]
+        public object Login(Usuarios user)
         {
-            UsuarioService usuarioService = (UsuarioService)this.services;
-
-            Usuarios usuario = usuarioService.GetUsuarioPorEmail(user.Email);
-
-            if (usuario == null || usuario.Senha != user.Senha)
-                throw new Exception("Usuário não existe");
-            else{ 
-                var json = JsonConvert.SerializeObject(usuario);
-                var identidade = new ClaimsIdentity();
-                identidade.AddClaim(new Claim("User", json));
-                DateTime dataCriacao = DateTime.Now;
-                DateTime dataExpiracao = dataCriacao +
-                TimeSpan.FromSeconds(300);
-
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("teste"));
-                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var handler = new JwtSecurityTokenHandler();
-                var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-                {
-                Issuer = "",
-                Audience = "",
-                SigningCredentials = credentials,
-                Subject = identidade,
-                NotBefore = dataCriacao,
-                Expires = dataExpiracao
-                });
-
-                var token = handler.WriteToken(securityToken);
-
-                return new
-                {
-                    authenticated = true,
-                    created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    accessToken = token,
-                    user = usuario,
-                    message = "OK"
-                };
-            }     
+            Usuarios u = new UsuarioService().GetUsuarioPorEmail(user.Email);
+            if (u == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound,
+                     "The user was not found.");
+            bool credentials = u.Senha.Equals(user.Senha);
+            if (!credentials) return Request.CreateResponse(HttpStatusCode.Forbidden,
+                "The username/password combination was wrong.");
+            return Request.CreateResponse(HttpStatusCode.OK,
+                 TokenManager.GenerateToken(user.Nome));
         }
     }
 }

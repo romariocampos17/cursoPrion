@@ -12,10 +12,10 @@ using System.Web.Http.Cors;
 namespace API.Controllers
 {
     [CustomAuthorize]
-    [EnableCors(origins: "*", headers:"*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize()]
     [CustomExceptionFilter]
-    public class GenericController<T> : ApiController  where T : class
+    public class GenericController<T> : ApiController where T : class
     {
         protected GenericService<T> services;
 
@@ -77,14 +77,18 @@ namespace API.Controllers
             return services.FindAll();
         }
 
-        public Usuarios UsuarioLogado {
-            get {var principal = (RequestContext.Principal as ClaimsPrincipal);
+        public Usuarios UsuarioLogado
+        {
+            get
+            {
+                var principal = (RequestContext.Principal as ClaimsPrincipal);
                 var json = principal.Claims.Where(x => x.Type == "User").FirstOrDefault().Value;
 
                 Usuarios logged = JsonConvert.DeserializeObject<Usuarios>(json);
 
                 return logged;
-                }
+            }
             set { UsuarioLogado = value; }
         }
+    }
 }

@@ -13,8 +13,18 @@ namespace backend.Services
     {
         public Usuarios GetUsuarioPorEmail(string email)
         {
-            UsuarioRepository usuarioRepository = (UsuarioRepository)this.repository;
-            return usuarioRepository.GetUsuarioPorEmail(email);
+            //UsuarioRepository usuarioRepository = (UsuarioRepository)this.repository;
+
+            Usuarios u = new Usuarios()
+            {
+                Id = 1,
+                Nome = "Romario",
+                Email = "Romario@",
+                Senha = "123"
+            };
+
+            return u;
+            //return usuarioRepository.GetUsuarioPorEmail(email);
         }
 
     }
